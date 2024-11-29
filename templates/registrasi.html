@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{ url_for('static', filename='pln.ico') }}" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Form Registrasi</title>
+    
+    <!-- Custom CSS for background and form styling -->
+    <style>
+       body {
+        background-image: url("{{ url_for('static', filename='1.png') }}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       }
+      .register-container {
+        background-color: #d6d6d6; /* Medium gray */
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 350px;
+      }
+      .register-container h4 {
+        font-weight: 600;
+        color: #333;
+      }
+      .btn-primary {
+        width: 100%;
+        font-weight: 500;
+        background-color: #4b4b4b; /* Dark gray */
+        border-color: #4b4b4b;
+      }
+      .btn-primary:hover {
+        background-color: #2f2f2f; /* Darker gray on hover */
+        border-color: #2f2f2f;
+      }
+      .form-label {
+        color: #333;
+      }
+      .form-control {
+        background-color: #e8e8e8; /* Light gray for inputs */
+        border: 1px solid #ccc;
+      }
+      .form-control:focus {
+        border-color: #4b4b4b; /* Focus border color */
+        box-shadow: 0 0 5px rgba(75, 75, 75, 0.5);           
+      }
+      .form-select {
+        background-color: #e8e8e8;
+        border: 1px solid #ccc;
+      }
+      .form-select:focus {
+        border-color: #4b4b4b;
+        box-shadow: 0 0 5px rgba(75, 75, 75, 0.5);
+      }
+      .text-start {
+        font-size: 0.9rem;
+        color: #333;
+      }
+      a {
+        color: #06bfcf;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- start Form Registrasi -->
+    <div class="register-container text-center">
+        <h4>Form Registrasi</h4>
+        <!-- pesan flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <!-- alert -->
+            <div class="alert alert-{{ category }} alert-dismissible fade show mt-2" role="alert">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>                    
+            {% endfor %}                   
+        {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('registrasi') }}" method="post" class="mt-3">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Masukkan Username" name="username" autocomplete="off" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Masukkan email" name="email" autocomplete="off" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Masukkan password" name="password" autocomplete="off" required>
+            </div>
+            <div class="mb-3">
+                <label for="level" class="form-label">Level</label>
+                <select class="form-select" name="level" id="level" required>
+                    <option value="">...Pilih Level...</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Petugas">Petugas</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrasi</button>
+            <div class="text-start mt-2">Sudah Punya Akun...? Klik <a href="{{ url_for('login') }}">Login</a></div>
+        </form>
+    </div>
+    <!-- end Form Registrasi -->
+
+    <!-- Optional JavaScript; Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  </body>
+</html>
